@@ -1,7 +1,5 @@
-package com.mycompany.employee_attendence;
-
+package employee_attendance;
 import java.util.Scanner;
-
 
 class attendance{
      String date;
@@ -42,31 +40,63 @@ class employee{
         this.designation = designation;
         this.salary = salary;
         this.id = id;
-        attendanceinp(d);
+        
     }
-    void attendanceinp(attendance[] d){
+    void attendanceinp(){
         Scanner myobj = new Scanner(System.in);
+        System.out.println(String.format("Enter Attendance detail informat:"));
+        System.out.println("Date,Timein[hh.mm],Timeout[hh.mm]:-");
         for(int i=1; i<=3; i++){
-            System.out.println(String.format("Enter Date %d:",i));
-            if(i>=2){
-                myobj.nextLine();
-            }
-            String date = myobj.nextLine();
-            System.out.println(String.format("Enter time in %d:",i));
-            double tin = myobj.nextDouble();
-            System.out.println(String.format("Enter time out %d:",i));
-            double tout = myobj.nextDouble();
-            d[i] = new attendance(date, tin, tout);
+            
+             String str = myobj.nextLine();
+             String[] strArr = str.split(",");
+             double tinn = Double.parseDouble(strArr[1]);
+             double toutt = Double.parseDouble(strArr[2]);
+            d[i-1] = new attendance(strArr[0],tinn,toutt);
         }
     
     }
     
+    void displyattendance(){
+        int j=0,W=0;
+        System.out.println(String.format("Name: %s, Id: %s, Designation: %s, Salary: %s, Age:%s",Name,id,designation,salary,age));
+        System.out.println(Name +"'s Attendance:" );
+        for(attendance i: d){
+            String p = (i.workinghrs()>0 ? "Present" : "Absent");
+            if(p.equals("Present")){
+                j+=1;
+                W+=i.workinghrs();
+            }
+            System.out.println("Date:" + i.date +"\t"+ p + "\t Worked hrs: "+ i.workinghrs());
+        }
+        System.out.println("Days present: "+j+"\tTotal Workin hrs: "+W);
+    }
+    
 }
-
-public class Employee_Attendence {
-
+public class Employee_attendance {
     public static void main(String[] args) {
-        employee e1 = new employee("ved", "111", "CEO", "24,00,000","21");
+        
+        Scanner myobj = new Scanner(System.in);
+        System.out.println("Enter number of employes:");
+        int n = myobj.nextInt();
+        employee [] e = new employee[n];
+        myobj.nextLine();
+        for(int i=0;i<n;i++){
+            System.out.println("Enter details in Format:");
+            System.out.println("[Name,ID,Designation,Salary,age]-");
+            
+             String str = myobj.nextLine();
+             String[] strArr = str.split(",");
+             e[i]= new employee(strArr[0],strArr[1],strArr[2],strArr[3],strArr[4]);
+             e[i].attendanceinp();
+        }
+        
+        for(int i=0;i<n;i++){
+            System.out.println("=================================================");
+            e[i].displyattendance();
+            System.out.println("=================================================");
+        }
+        
         
     }
 }
