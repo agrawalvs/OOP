@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package time;
+package com.mycompany.time;
 
 
-public class greatclock extends Time {
+public class greatclock extends Clock {
     int millisec,sec,sign;
 
     public greatclock(int h, int m, int s, int ms) {
@@ -16,7 +11,7 @@ public class greatclock extends Time {
     }
     
     greatclock add(greatclock obj){
-        int nhrs = Math.abs(alltoms() + obj.alltoms());
+        int nhrs = alltoms() + obj.alltoms();
         int msecc = (int)(nhrs%1000);
         nhrs/=1000;
         int secc = (int) (nhrs%60);
@@ -27,7 +22,7 @@ public class greatclock extends Time {
     }
     
     greatclock sub(greatclock obj){
-        int nhrs = Math.abs(alltoms() - obj.alltoms());
+        int nhrs = (alltoms() - obj.alltoms());
         
         int msecc = (int)(nhrs%1000);
         nhrs/=1000;
@@ -35,9 +30,6 @@ public class greatclock extends Time {
         nhrs/=60;
         int minn = (int)(nhrs%60); 
         int hrss = (int) nhrs/60;
-        if(alltoms() < obj.alltoms()){
-            hrs = - hrs;
-        }
         return new greatclock (hrss,minn,secc,msecc);
     }
     
@@ -46,7 +38,20 @@ public class greatclock extends Time {
         return mils;
     }
     
+    @Override
     void display(){
-        System.out.println("Time = " + hrs +":"+ min+ ":" + sec + ":" + millisec);
+        greatclock Obj1;
+        if(this.hrs<0){
+            greatclock obj6 = new greatclock(24,0,0,0);
+            Obj1 = obj6.add(this);
+        }
+        else if(this.hrs>24){
+            greatclock obj6 = new greatclock(24,0,0,0);
+            Obj1 = this.sub(obj6);
+        }
+        else{
+            Obj1 = this;
+        }
+        System.out.println("Time = " + Obj1.hrs +":"+ Obj1.min+ ":" + Obj1.sec + ":" + Obj1.millisec);
     }
 }
