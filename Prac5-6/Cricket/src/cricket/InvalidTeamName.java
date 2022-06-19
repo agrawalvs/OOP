@@ -9,13 +9,17 @@ class InvalidTeamName extends Exception{
     
     @Override
     public String toString(){
-        if(n==2)
-            return "Invalid Team Name found. string contains Special Character";
-        else if(n==1)
-            return "Invalid Team Name found. string contains Numbers";
-        else
-            return "Invalid Team Name found. string contains Special Character."
-                    +"string contains number";
-
+        switch (n) {
+            case 2:
+                return "Invalid Team Name found. string contains Special Character";
+            case 1:
+                return "Invalid Team Name found. string contains Numbers";
+            case 3:
+                return "Invalid Team Name found. string contains Special Character."
+                        +"string contains number";
+            default:
+                break;
+        }
+        return null;
     }
 }

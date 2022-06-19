@@ -10,7 +10,8 @@ class Ipl {
     Ipl(String tn, int mp,int w,int l) throws InvalidCountException{
         Team_Name = tn;
         mplayed = mp;
-        update_count(w,l);
+        win = w;
+        lost = l;
     }
     
     void register_team() throws InvalidTeamName{
@@ -23,13 +24,7 @@ class Ipl {
         }
     }
     
-    void update_count(int w, int l) throws InvalidCountException{
-        win = w;
-        lost = l;
-        check_count();
-    }
-    
-    void check_count () throws InvalidCountException{
+    final void check_count () throws InvalidCountException{
         try{
             if(mplayed != win + lost)
                 throw new InvalidCountException(mplayed-win-lost);
@@ -69,8 +64,12 @@ class Ipl {
         return 0;
     }
     
-    void display() throws InvalidTeamName{
+    void display() throws InvalidTeamName, InvalidCountException{
+        System.out.printf("Team Name: %s\tMatch Played: %d\tWins: %d\tloss:%d\n",Team_Name,mplayed,win,lost);
+        check_count();
         register_team();
         check_Qualification();
+        System.out.printf("------------------------------------------------"
+                + "------------\n\n");
     }
 }

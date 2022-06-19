@@ -1,0 +1,4 @@
+com\mycompany\bank_account\fix_deposit.class
+com\mycompany\bank_account\Bank_Account.class
+com\mycompany\bank_account\saving_account.class
+com\mycompany\bank_account\debitable.class
