@@ -6,7 +6,7 @@ public class Cricket {
     
     public static void main(String[] args) throws FileNotFoundException, IOException, InvalidCountException, InvalidTeamName {
         File f;
-        f = new File("C:\\Users\\Kapil Agrawal\\Documents\\Ipl.txt");
+        f = new File("Ipl.txt");
         BufferedReader in = new BufferedReader(new FileReader(f));
         String name;
         int mp,w,l;
